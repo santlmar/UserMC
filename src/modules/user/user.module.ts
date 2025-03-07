@@ -47,7 +47,7 @@ import { AuthModule } from "../auth/auth.module";
       inject: ['UserService'],
     },
       JwtAuthGuard,
-      JwtProvider,    
+      JwtProvider,
   ],
   exports: [TypeOrmModule, 'UserService'],
 })
