@@ -21,7 +21,7 @@ export class AuthService implements IAuthService {
     }
     val = await this.authRepository.findOne({
       where: { email },
-      relations: ['user', 'user.role'],
+      relations: ['user'],
     });
     return val
   }
