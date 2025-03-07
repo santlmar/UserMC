@@ -1,6 +1,6 @@
 import { ConflictException, HttpStatus, Injectable, NotFoundException, RequestTimeoutException } from "@nestjs/common";
 import { IUserService } from "../../domain/service/IUser.service";
-import { IUser, IUserCreate, IUserUpdate } from "../../domain/interfaces/IUser";
+import { IUser, IUserCreate, IUserDto, IUserUpdate } from "../../domain/interfaces/IUser";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../entity/user.entity";
 import { Repository } from "typeorm";
