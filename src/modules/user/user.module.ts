@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { UserController } from "./infrastructure/controller/user.controller";
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from "./infrastructure/entity/user.entity";
@@ -7,15 +7,16 @@ import { GetUserUseCase } from "./application/getUser/GetUser.useCase";
 import { CreateUserUseCase } from "./application/createUser/CreateUser.useCase";
 import { UpdateUserUseCase } from "./application/updateUser/UpdateUser.useCase";
 import { HashProvider } from "src/shared/providers/hash.provider/hash.provider";
-import { JwtAuthGuard } from "../auth/infractructure/jwt/jwt-auth.guard";
 import { JwtProvider } from "src/shared/providers/jwt.provider/jwt.provider";
 import { IUserService } from "./domain/service/IUser.service";
 import { IHashProvider } from "src/common/domain/services/IHash.service";
 import { AuthModule } from "../auth/auth.module";
+import { JwtAuthGuard } from "../auth/infrastructure/guard/jwt/jwt-auth.guard";
 
 @Module({
   controllers: [UserController],
-  imports: [TypeOrmModule.forFeature([User]), AuthModule],
+  imports: [TypeOrmModule.forFeature([User]),     forwardRef(() => AuthModule), // 🔹 Usa forwardRef aquí también
+],
   providers: [
 
     {

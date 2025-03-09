@@ -5,13 +5,13 @@ import { IAuthService } from './domain/service/IAuth.service';
 import { HashProvider } from 'src/shared/providers/hash.provider/hash.provider';
 import { JwtProvider } from 'src/shared/providers/jwt.provider/jwt.provider';
 import { IJwtService } from './domain/service/IJwt.service';
-import { Auth } from './infractructure/entity/auth.entity';
 import { IHashProvider } from 'src/common/domain/services/IHash.service';
 import { AuthUserUseCase } from './application/authUser/AuthUser.useCase';
-import { AuthService } from './infractructure/service/auth.service';
-import { AuthController } from './infractructure/controller/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Auth } from './infrastructure/entity/auth.entity';
+import { AuthController } from './infrastructure/controller/auth.controller';
+import { AuthService } from './infrastructure/service/auth.service';
 
 @Module({
   controllers: [AuthController],

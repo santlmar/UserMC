@@ -1,8 +1,9 @@
-import { ExecutionContext, Injectable, SetMetadata } from "@nestjs/common";
-import { KEYS } from "common/constants/keys";
-import { ForbiddenError } from "src/common/domain/errors/ForbiddenError";
-import { JwtProvider } from "src/shared/providers/jwt.provider/jwt.provider";
+import { ExecutionContext, Injectable } from '@nestjs/common';
+import { SetMetadata } from '@nestjs/common';
+import { KEYS } from 'common/constants/keys';
 import { Request } from 'express';
+import { ForbiddenError } from 'src/common/domain/errors/ForbiddenError';
+import { JwtProvider } from 'src/shared/providers/jwt.provider/jwt.provider';
 
 
 export const IS_PUBLIC_KEY = 'isPublic';
@@ -11,6 +12,7 @@ export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 @Injectable()
 export class JwtAuthGuard {
   constructor(private readonly jwtProvider: JwtProvider) {}
+
   canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
     const token = this.getHeadersFromRequest(request);

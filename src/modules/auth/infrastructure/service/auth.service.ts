@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { IAuthService } from '../../domain/service/IAuth.service';
 import { JwtService } from '@nestjs/jwt';
@@ -14,16 +14,22 @@ export class AuthService implements IAuthService {
   ) {}
 
   async validateUser(email: string): Promise<IAuth> {
-    let val;
     try {
+
     } catch (error) {
       console.log('error', error);
     }
-    val = await this.authRepository.findOne({
+
+    const auth = await this.authRepository.findOne({
       where: { email },
       relations: ['user'],
     });
-    return val
+  
+    if (!auth) {
+      throw new NotFoundException(`Auth record not found for email: ${email}`);
+    }
+  
+    return auth;
   }
 }
 

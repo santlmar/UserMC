@@ -1,11 +1,12 @@
 import { IAuth } from "src/modules/auth/domain/interfaces/IAuth";
 import { IUser } from "../../domain/interfaces/IUser";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Auth } from "src/modules/auth/infractructure/entity/auth.entity";
+import { Auth } from "src/modules/auth/infrastructure/entity/auth.entity";
+
 
 @Entity('user')
 export class User implements IUser {
-    @PrimaryGeneratedColumn()    
+    @PrimaryGeneratedColumn() 
     id: number;
     
     @Column()
@@ -23,7 +24,7 @@ export class User implements IUser {
     @Column()
     gender: string;
     
-  @OneToOne(() => Auth, { cascade: true })
-  @JoinColumn()
-  auth: IAuth;
+    @OneToOne(() => Auth, { cascade: true })
+    @JoinColumn()
+    auth: IAuth;
 }

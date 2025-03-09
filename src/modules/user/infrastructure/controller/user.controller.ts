@@ -3,12 +3,12 @@ import { GetUserUseCase } from "../../application/getUser/GetUser.useCase";
 import { ResponseAdapter } from './../../../../../common/response-adapter/response.adapter';
 import { HTTP_RESPONSE_MESSAGE } from "common/constants/http-message";
 import { KEYS } from "common/constants/keys";
-import { ITokenPayload } from "src/modules/auth/infractructure/interfaces/IToken";
 import { CreateUserUseCase } from "../../application/createUser/CreateUser.useCase";
 import { UserDto } from "../dtos/user.dto";
 import { UpdateUserUseCase } from "../../application/updateUser/UpdateUser.useCase";
-import { JwtAuthGuard } from "src/modules/auth/infractructure/jwt/jwt-auth.guard";
 import { IUserUpdate } from "../../domain/interfaces/IUser";
+import { JwtAuthGuard } from "src/modules/auth/infrastructure/guard/jwt/jwt-auth.guard";
+import { ITokenPayload } from "src/modules/auth/infrastructure/interfaces/IToken";
 
 @Controller('user')
 export class UserController {
@@ -25,7 +25,7 @@ export class UserController {
     @Get()
     public async getUser(@Req() request: Request) {
       const auth: ITokenPayload = request[KEYS.USER] as ITokenPayload;
-      console.log(auth)
+      console.log('ID extraído del token:', auth.id); // 🔹 Verifica si auth.id es el user.id o auth.id
       return ResponseAdapter.set(
         HttpStatus.OK,
         await this.getuserUseCase.run(auth.id),
@@ -50,6 +50,7 @@ export class UserController {
     @Patch()
     public async updateUser(@Body() user: IUserUpdate, @Req() req: Request) {
       const token: ITokenPayload = req[KEYS.USER] as ITokenPayload;
+      
       return ResponseAdapter.set(
         HttpStatus.OK,
         await this.updateUserUseCase.run(token.id, user),

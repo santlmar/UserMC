@@ -5,7 +5,7 @@ import { User } from './modules/user/infrastructure/entity/user.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // Asegúrate de que el ConfigModule está cargado
+    ConfigModule.forRoot(), 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -16,9 +16,9 @@ import { User } from './modules/user/infrastructure/entity/user.entity';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User], // Aquí puedes agregar más entidades si es necesario
-        synchronize: true, // ⚠️ SOLO en desarrollo, en producción usa migrations
-        options: { encrypt: false }, // Importante si tu SQL Server no usa SSL
+        entities: [User], 
+        synchronize: true,
+        options: { encrypt: false }, 
       }),
     }),
   ],

@@ -1,12 +1,13 @@
 import { IAuthService } from '../../domain/service/IAuth.service';
-import { IJwtService } from '../../domain/service/IJwt.service';
+import { AuthDto } from '../../infrastructure/dtos/auth.dto';
+
+import { IAccessToken } from '../../domain/interfaces/IAccessToken';
 import { IAuth } from '../../domain/interfaces/IAuth';
 import { IHashProvider } from 'src/common/domain/services/IHash.service';
-import { AuthDto } from '../../infractructure/dtos/auth.dto';
 import { NotFoundError } from 'rxjs';
 import { ForbiddenError } from 'src/common/domain/errors/ForbiddenError';
 import { InternalServerError } from 'src/common/domain/errors/InternalServerError';
-import { IAccessToken } from '../../domain/interfaces/IAccessToken';
+import { IJwtService } from '../../domain/service/IJwt.service';
 
 export class AuthUserUseCase {
   constructor(
